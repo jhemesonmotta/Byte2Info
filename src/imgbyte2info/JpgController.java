@@ -4,22 +4,6 @@ public class JpgController {
     public JpgController() {
     }
     
-    public void printHexadecimal(byte[] byte_array){
-        String hexStr = "";
-        for(int i = 0; i < byte_array.length; i ++){
-            hexStr = hexStr + " " + Integer.toString(byte_array[i],16);  
-        }
-        System.out.println(hexStr);
-    }
-    
-    public void printBytes(byte[] byte_array){
-        String bytes = "";
-        for(int i = 900; i < 910; i ++){
-            bytes += byte_array[i] + " ";  
-        }
-        System.out.println(bytes);
-    }
-    
     public String getFormat(byte[] byte_array){
         String strFinal = "";
         
@@ -57,9 +41,6 @@ public class JpgController {
         // só consigo pegar quando é menor que 100
         for(int i=900; i<901; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
-            while(t.length()<2){
-                t="0"+t;
-            }
             strFinal += t;
         }
         
@@ -69,12 +50,8 @@ public class JpgController {
     public Integer getLargura(byte[] byte_array){
         String strFinal = "";        
         //Os itens presentes entre as posições 902 e 904 indicam a Altura em pixels da imagem.
-        // só consigo pegar quando é menor que 100
         for(int i=902; i<903; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
-            while(t.length()<2){
-                t="0"+t;
-            }
             strFinal += t;
         }
         
