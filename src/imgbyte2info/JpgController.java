@@ -31,7 +31,7 @@ public class JpgController {
             return "rgb";
         }
         else{
-            return tipo;
+            return "undefined";
         }
     }
     
