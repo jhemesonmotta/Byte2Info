@@ -1,15 +1,33 @@
 package imgbyte2info;
-public class PngController {
+public class JpgController {
 
-    public PngController() {
+    public JpgController() {
+    }
+    
+    public void printHexadecimal(byte[] byte_array){
+        String hexStr = "";
+        for(int i = 0; i < byte_array.length; i ++){
+            hexStr = hexStr + " " + Integer.toString(byte_array[i],16);  
+        }
+        System.out.println(hexStr);
+    }
+    
+    public void printBytes(byte[] byte_array){
+        String bytes = "";
+        for(int i = 900; i < 910; i ++){
+            bytes += byte_array[i] + " ";  
+        }
+        System.out.println(bytes);
     }
     
     public String getFormat(byte[] byte_array){
         String strFinal = "";
-        for(int i=1; i<4; i++ ){
+        
+        // os bytes 6, 7, 8 e 9 correspondem ao formato do arquivo
+        for(int i=6; i<10; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
-
             StringBuilder output = new StringBuilder();
+            
             for (int c = 0; c < t.length(); c+=2) {
                 String str = t.substring(c, c+2);
                 output.append((char)Integer.parseInt(str, 16));
@@ -20,35 +38,24 @@ public class PngController {
     }
     
     public String getTipoTons(byte[] byte_array){
-    //A posição 25 do cabeçalho indica o tipo de tons.
-        String tipo = Integer.toString(byte_array[25],16).replace("-","");
-        while(tipo.length()<2){
-            tipo = "0"+ tipo;
-        }
-        if(Integer.parseInt(tipo) == 0){
+        String tipo = Integer.toString(byte_array[43],16).replace("-","");
+        
+        if(Integer.parseInt(tipo) == 1){
             return "grayscale";
         }
-        else if(Integer.parseInt(tipo) == 2){
+        else if(Integer.parseInt(tipo) == 3){
             return "rgb";
         }
-        else if(Integer.parseInt(tipo) == 3){
-            return "palette index";
-        }
-        else if(Integer.parseInt(tipo) == 4){
-            return "grayscale with alpha";
-        }
-        else if(Integer.parseInt(tipo) == 6){
-            return "rgba";
-        }
         else{
-            return "undefined";
+            return tipo;
         }
     }
     
     public Integer getAltura(byte[] byte_array){
         String strFinal = "";        
-        //Os itens presentes entre as posições 21 à 24 indicam a Altura em pixels da imagem.
-        for(int i=20; i<24; i++ ){
+        //Os itens presentes entre as posições 900 e 901 indicam a Altura em pixels da imagem.
+        // só consigo pegar quando é menor que 100
+        for(int i=900; i<901; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
             while(t.length()<2){
                 t="0"+t;
@@ -60,10 +67,10 @@ public class PngController {
     }
     
     public Integer getLargura(byte[] byte_array){
-        String strFinal = "";
-        
-        //Os itens presentes entre as posições 16 à 20 indicam a Largura em pixels da imagem.
-        for(int i=16; i<20; i++ ){
+        String strFinal = "";        
+        //Os itens presentes entre as posições 902 e 904 indicam a Altura em pixels da imagem.
+        // só consigo pegar quando é menor que 100
+        for(int i=902; i<903; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
             while(t.length()<2){
                 t="0"+t;
