@@ -38,7 +38,6 @@ public class JpgController {
     public Integer getAltura(byte[] byte_array){
         String strFinal = "";        
         //Os itens presentes entre as posições 900 e 901 indicam a Altura em pixels da imagem.
-        // só consigo pegar quando é menor que 100
         for(int i=900; i<901; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
             strFinal += t;
