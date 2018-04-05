@@ -22,9 +22,7 @@ public class PngController {
     public String getTipoTons(byte[] byte_array){
     //A posição 25 do cabeçalho indica o tipo de tons.
         String tipo = Integer.toString(byte_array[25],16).replace("-","");
-        while(tipo.length()<2){
-            tipo = "0"+ tipo;
-        }
+        
         if(Integer.parseInt(tipo) == 0){
             return "grayscale";
         }
@@ -47,12 +45,9 @@ public class PngController {
     
     public Integer getAltura(byte[] byte_array){
         String strFinal = "";        
-        //Os itens presentes entre as posições 21 à 24 indicam a Altura em pixels da imagem.
+        //Os itens presentes entre as posições 20 à 23 indicam a Altura em pixels da imagem.
         for(int i=20; i<24; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
-            while(t.length()<2){
-                t="0"+t;
-            }
             strFinal += t;
         }
         
@@ -62,12 +57,9 @@ public class PngController {
     public Integer getLargura(byte[] byte_array){
         String strFinal = "";
         
-        //Os itens presentes entre as posições 16 à 20 indicam a Largura em pixels da imagem.
+        //Os itens presentes entre as posições 16 à 19 indicam a Largura em pixels da imagem.
         for(int i=16; i<20; i++ ){
             String t = Integer.toString(byte_array[i],16).replace("-","");
-            while(t.length()<2){
-                t="0"+t;
-            }
             strFinal += t;
         }
         

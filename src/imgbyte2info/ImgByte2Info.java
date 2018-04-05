@@ -6,6 +6,7 @@ import java.nio.file.Files;
 
 public class ImgByte2Info {
     public static void main(String[] args) throws IOException{
+        ImgByte2Info.testaPng();
         ImgByte2Info.testaJPG();
     }
     
